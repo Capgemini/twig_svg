@@ -1,0 +1,23 @@
+<?php
+
+/**
+ * @file
+ * twig svg functions.
+ */
+
+/**
+ * Implements hook_preprocess_html().
+ */
+function twig_svg_preprocess_html(&$variables) {
+  // Get the contents of the SVG sprite.
+  // TODO need to cater for SVG that may not be in this folder.
+  // TODO admin themes condition
+  $icons = file_get_contents(\Drupal::theme()->getActiveTheme()->getPath() . '/images/icons.svg');
+
+  if (!empty($icons)) {
+    $variables['page_bottom']['icons'] = [
+      '#type' => 'inline_template',
+      '#template' => '<span class="hidden">' . $icons . '</span>',
+    ];
+  }
+}

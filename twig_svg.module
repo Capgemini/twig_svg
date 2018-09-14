@@ -2,7 +2,7 @@
 
 /**
  * @file
- * twig svg functions.
+ * twig_svg functions.
  */
 
 /**
@@ -13,13 +13,16 @@ function twig_svg_preprocess_html(&$variables) {
 
   // Avoid admin pages.
   if (!$admin_context->isAdminRoute()) {
-    // Get the contents of the SVG sprite.
-    // TODO need to cater for icons not in this folder....
-    $icons = file_get_contents(\Drupal::theme()->getActiveTheme()->getPath() . '/images/icons.svg');
+    $icon_path = \Drupal::theme()->getActiveTheme()->getPath() . '/images/icons.svg';
 
-    $variables['page_bottom']['icons'] = [
-      '#type' => 'inline_template',
-      '#template' => '<span class="hidden">' . $icons . '</span>',
-    ];
+    if (file_exists($icon_path)) {
+      // Get the contents of the SVG sprite.
+      $icons = file_get_contents($icon_path);
+
+      $variables['page_bottom']['icons'] = [
+        '#type' => 'inline_template',
+        '#template' => '<span class="hidden">' . $icons . '</span>',
+      ];
+    }
   }
 }

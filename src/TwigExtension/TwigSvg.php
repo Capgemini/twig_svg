@@ -8,7 +8,7 @@ namespace Drupal\twig_svg\TwigExtension;
 class TwigSvg extends \Twig_Extension {
 
   /**
-   * List the custom Twig fuctions.
+   * List the custom Twig functions.
    *
    * @return array
    *   The twig function.
